@@ -907,16 +907,13 @@ def rename_models(cr, model_spec):
                 continue
             logged_query(
                 cr, """
-                 UPDATE %(table)s
-                 SET %(column)s = replace(
-                    %(column)s, '%(old)s,', '%(new)s,')
-                 WHERE %(column)s LIKE '%(old)s,%%'
-                 """ % {
-                    "table": table,
-                    "column": column,
-                    "old": old,
-                    "new": new,
-                }, skip_no_result=True,
+                 UPDATE %s
+                 SET %s = replace(
+                    %s, %s, %s)
+                 WHERE %s LIKE '%s,%%'
+                 """,
+                 (AsIs(table), AsIs(column), AsIs(column), old, new, AsIs(column), AsIs(old)),
+                 skip_no_result=True,
             )
         # Update export profiles references
         logged_query(
