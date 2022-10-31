@@ -1504,6 +1504,9 @@ def logged_query(cr, query, args=None, skip_no_result=False):
     log_msg = False
     start = datetime.now()
     try:
+        logger.info("--------------------")
+        logger.info(query)
+        logger.info(args)
         cr.execute(query, args)
     except (ProgrammingError, IntegrityError):
         log_level = _logging_module.ERROR
