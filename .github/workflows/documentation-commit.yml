@@ -7,7 +7,7 @@ name: Build and commit documentation
 
 on:
   push:
-    branches: ["master"]
+    branches: ["REF-openupgradelib-documentation"]
 
 jobs:
   documentation-commit:
